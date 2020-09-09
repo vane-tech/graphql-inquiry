@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  code:
+    build: .
+    command: clojure -R:nREPL -m nrepl.cmdline -b 0.0.0.0 -p 4078
+    ports:
+      - "4078:4078"
+    volumes:
+      - ".:/code"
+      - "./tmp/m2:/root/.m2"
