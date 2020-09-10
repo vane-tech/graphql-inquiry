@@ -57,14 +57,14 @@ If you know how aliases work in GraphQL, you know how to do them in graphql-inqu
                 :boss:employee {:id 2, :active true} [:name :address]])
 ```
 
-Prettified:
+Prettified query:
 ```graphql
 {
-  workhorse:employee (id:1,active:true) {
+  workhorse:employee (id: 1, active: true) {
     name
     address
   }
-  boss:employee (id:2,active:true) {
+  boss:employee (id: 2, active: true) {
     name
     address
   }
@@ -77,10 +77,10 @@ This of course works just fine at any level!
                                                  :address
                                                  :mates:friends [:name :email]]])
 ```
-Prettified:
+Prettified query:
 ```graphql
 {
-  employee (id:1,active:true) {
+  employee (id: 1, active: true) {
     name
     address
     mates:friends {name email}
@@ -100,7 +100,7 @@ If you want to define variables to the query, you need to pass a map to the `que
                 :variables {:id :ID!
                             :name :String}})
 ```
-Prettified:
+Prettified query:
 ```graphql
 query ($id: ID!, $name: String) {
   workhorse:employee (id: $id, active: true, name: $name) {
@@ -123,7 +123,7 @@ Mutations work just like queries with variables, but instead of `query`, you cal
                                :project :ProjectInput!}
                    :query [:addProjectToEmployee {:employeeId :id, :project :project} [:allocation :name]]})
 ```
-Prettified:
+Prettified query:
 ```graphql
 mutation ($id: ID!, $project: ProjectInput!) {
   addProjectToEmployee (employeeId: $id, project: $project) {
@@ -140,7 +140,7 @@ As you probably expect by now, there is no special syntax for meta fields. Just 
 ```Clojure
 (query [:say [:hello :world :__typename]])
 ```
-Prettified:
+Prettified query:
 ```graphql
 {
   say {
