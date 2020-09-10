@@ -14,9 +14,10 @@
                                   \,
                                   (map (fn [[k v]]
                                          (let [v (cond (keyword? v) (str \$ (name v))
-                                                       (string? v) (str \" v \")
+                                                       (or (int? v)
+                                                           (boolean? v)) (str v)
                                                        (nil? v) "null"
-                                                       :else (str v))]
+                                                       :else (str \" v \"))]
                                            (str (name k) ":" v)))
                                        query-structure))
                                 \))
