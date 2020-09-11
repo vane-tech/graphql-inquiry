@@ -1,8 +1,10 @@
 # GraphQL-Inquiry
 
+[![Clojars Project](https://img.shields.io/clojars/v/graphql-inquiry.svg)](https://clojars.org/graphql-inquiry)
+
 A tiny library to generate [GraphQL queries](https://graphql.org/) from Clojure data structures.
 
-Heavily inspired by [Poor man’s GraphQL client for ClojureScript apps](https://medium.com/@kirill.ishanov/poor-mans-graphql-client-for-clojurescript-apps-8dc4b04e8738) by Kirill Ishanov. Thank you very much!
+Heavily inspired by [Poor man’s GraphQL client for ClojureScript apps](https://medium.com/@kirill.ishanov/poor-mans-graphql-client-for-clojurescript-apps-8dc4b04e8738) by Kirill Ishanov. Thank you very much! We have used this for more than a year.
 
 ## Philosophy
 
@@ -155,8 +157,10 @@ Prettified query:
 
 1. First, adjust the `<version>` in the [pom.xml](./pom.xml).
 2. Now, run `bin/dclojure -Spom` to update the dependencies.
-3. Next, generate the jar with `bin/dclojure -A:pack mach.pack.alpha.skinny --no-libs --project-path graphql-inquiry.jar`
-4. Publish the jar on Clojars with `docker-compose run -e CLOJARS_USERNAME=billfront -e CLOJARS_PASSWORD=<token> code clojure -A:deploy`. Get a token from [Clojars dashboard](https://clojars.org/tokens).
+3. Commit these things: `git commit -p`
+4. Tag the release and push it and the rest: ``git tag v`grep -oP '(?<=^  <version>).*?(?=</version>)' pom.xml` && git push --tags && git push``
+5. Next, generate the jar with `bin/dclojure -A:pack mach.pack.alpha.skinny --no-libs --project-path graphql-inquiry.jar`
+6. Publish the jar on Clojars with `docker-compose run -e CLOJARS_USERNAME=billfront -e CLOJARS_PASSWORD=<token> code clojure -A:deploy`. Get a token from [Clojars dashboard](https://clojars.org/tokens).
 
 ## MIT License
 
