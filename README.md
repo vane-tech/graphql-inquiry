@@ -151,7 +151,14 @@ Prettified query:
 }
 ```
 
-### MIT License
+## Release a new version
+
+1. First, adjust the `<version>` in the [pom.xml](./pom.xml).
+2. Now, run `bin/dclojure -Spom` to update the dependencies.
+3. Next, generate the jar with `bin/dclojure -A:pack mach.pack.alpha.skinny --no-libs --project-path graphql-inquiry.jar`
+4. Publish the jar on Clojars with `docker-compose run -e CLOJARS_USERNAME=billfront -e CLOJARS_PASSWORD=<token> code clojure -A:deploy`. Get a token from [Clojars dashboard](https://clojars.org/tokens).
+
+## MIT License
 
 Copyright 2020 BillFront GmbH
 

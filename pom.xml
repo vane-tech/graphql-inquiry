@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>graphql-inquiry</groupId>
+  <artifactId>graphql-inquiry</artifactId>
+  <version>0.0.1</version>
+  <name>graphql-inquiry</name>
+  <description>Converts clojure(script) data structures into GraphQL queries</description>
+  <url>https://github.com/BillFront/graphql-inquiry</url>
+  <scm>
+    <connection>scm:git:git://github.com/BillFront/graphql-inquiry</connection>
+    <url>https://github.com/BillFront/graphql-inquiry</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>1.10.1</version>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <repository>
+      <id>clojars</id>
+      <url>https://repo.clojars.org/</url>
+    </repository>
+  </repositories>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+  </build>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+  </licenses>
+</project>

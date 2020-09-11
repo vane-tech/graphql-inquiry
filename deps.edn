@@ -1,3 +1,8 @@
 {:deps {org.clojure/clojure {:mvn/version "1.10.1"}}
  :aliases {:test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.0.672"}}}
-           :nREPL {:extra-deps {nrepl/nrepl {:mvn/version "0.8.1"}}}}}
+           :nREPL {:extra-deps {nrepl/nrepl {:mvn/version "0.8.1"}}}
+           :pack {:extra-deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git"
+                                                :sha "e518d9b2b70f4292c9988d2792b8667d88a6f4df"}}
+                  :main-opts ["-m"]}
+           :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+                    :main-opts ["-m" "deps-deploy.deps-deploy" "deploy" "graphql-inquiry.jar"]}}}
