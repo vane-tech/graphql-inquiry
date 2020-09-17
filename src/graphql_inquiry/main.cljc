@@ -31,10 +31,10 @@
 
     :else (throw-error)))
 
-(defn- type-definition [variables]
-  (when (seq variables)
+(defn- variable-definition [variable-defs]
+  (when (seq variable-defs)
     (str \(
-         (->> variables
+         (->> variable-defs
               (map (fn [[variable type]]
                      (str \$ (name variable) \: (name type))))
               (str/join \,))
@@ -42,8 +42,8 @@
 
 (defn query [options]
   (cond (sequential? options) (unparse options)
-        (map? options) (str "query " (type-definition (:variables options)) (unparse (:query options)))
+        (map? options) (str "query " (variable-definition (:variable-defs options)) (unparse (:query options)))
         :else (throw-error)))
 
-(defn mutation [{:keys [variables query]}]
-  (str "mutation " (type-definition variables) (unparse query)))
+(defn mutation [{:keys [variable-defs query]}]
+  (str "mutation " (variable-definition variable-defs) (unparse query)))

@@ -99,8 +99,8 @@ If you want to define variables to the query, you need to pass a map to the `que
                                              :active true
                                              :name :name} [:name :address]
                         :boss:employee {:id :id, :active true} [:name :address]]
-                :variables {:id :ID!
-                            :name :String}})
+                :variable-defs {:id :ID!
+                                :name :String}})
 ```
 Prettified query:
 ```graphql
@@ -121,8 +121,8 @@ query ($id: ID!, $name: String) {
 Mutations work just like queries with variables, but instead of `query`, you call `mutation`:
 
 ```Clojure
-(graphql/mutation {:variables {:id :ID!
-                               :project :ProjectInput!}
+(graphql/mutation {:variable-defs {:id :ID!
+                                   :project :ProjectInput!}
                    :query [:addProjectToEmployee {:employeeId :id, :project :project} [:allocation :name]]})
 ```
 Prettified query:

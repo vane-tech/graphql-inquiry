@@ -14,12 +14,12 @@
                          :true true
                          :false false
                          :null nil} [:hello :world]]))))
-  (testing "with variables"
+  (testing "with variable-defs"
     (is (= "query ($id:ID!,$greeting:String!) {say (string:\"hae maga\",id:$id) {hello (greeting:$greeting) world}}"
            (query {:query [:say {:string "hae maga"
                                  :id :id} [:hello {:greeting :greeting} :world]]
-                   :variables {:id :ID!
-                               :greeting :String!}}))))
+                   :variable-defs {:id :ID!
+                                   :greeting :String!}}))))
   (testing "with aliases"
     (is (= "{howdy:say {hello world}}"
            (query [:howdy:say [:hello :world]]))))
@@ -34,5 +34,5 @@
   (is (= "mutation ($id:ID!,$customer:Customer!) {updateCustomer (id:$id,customer:$customer) {name email}}"
          (mutation {:query [:updateCustomer {:id :id
                                              :customer :customer} [:name :email]]
-                    :variables {:id :ID!
-                                :customer :Customer!}}))))
+                    :variable-defs {:id :ID!
+                                    :customer :Customer!}}))))
