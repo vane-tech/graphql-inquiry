@@ -14,8 +14,9 @@
                                   \,
                                   (map (fn [[k v]]
                                          (let [v (cond (keyword? v) (str \$ (name v))
-                                                       (or (int? v)
-                                                           (boolean? v)) (str v)
+                                                       (or (integer? v)
+                                                           (true? v)
+                                                           (false? v)) (str v)
                                                        (nil? v) "null"
                                                        :else (str \" v \"))]
                                            (str (name k) ":" v)))
