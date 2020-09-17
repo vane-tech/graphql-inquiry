@@ -1,9 +1,9 @@
 (ns graphql-inquiry.main
   (:require [clojure.string :as str]))
 
-(defn- throw-error []
-  #?(:clj (throw (Error. "Cannot parse query"))
-     :cljs (js/Error "Cannot parse query")))
+(defn- throw-error [msg]
+  #?(:clj (throw (Error. msg))
+     :cljs (throw (js/Error msg))))
 
 (defn- unparse [query-structure]
   (cond
@@ -29,7 +29,7 @@
                                          (map unparse query-structure))
                                        \})
 
-    :else (throw-error)))
+    :else (throw-error "Invalid query")))
 
 (defn- variable-definition [variable-defs]
   (when (seq variable-defs)
@@ -43,7 +43,7 @@
 (defn query [options]
   (cond (sequential? options) (unparse options)
         (map? options) (str "query " (variable-definition (:variable-defs options)) (unparse (:query options)))
-        :else (throw-error)))
+        :else (throw-error "Invalid query (must be a map or vector)")))
 
 (defn mutation [{:keys [variable-defs query]}]
   (str "mutation " (variable-definition variable-defs) (unparse query)))
