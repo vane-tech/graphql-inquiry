@@ -11,22 +11,22 @@
 
     (map? query-structure) (str \(
                                 (str/join
-                                  \,
-                                  (map (fn [[k v]]
-                                         (let [v (cond (keyword? v) (str \$ (name v))
-                                                       (or (integer? v)
-                                                           (true? v)
-                                                           (false? v)) (str v)
-                                                       (nil? v) "null"
-                                                       :else (str \" v \"))]
-                                           (str (name k) ":" v)))
-                                       query-structure))
+                                 \,
+                                 (map (fn [[k v]]
+                                        (let [v (cond (keyword? v) (str \$ (name v))
+                                                      (or (integer? v)
+                                                          (true? v)
+                                                          (false? v)) (str v)
+                                                      (nil? v) "null"
+                                                      :else (str \" v \"))]
+                                          (str (name k) ":" v)))
+                                      query-structure))
                                 \))
 
     (sequential? query-structure) (str \{
                                        (str/join
-                                         \space
-                                         (map unparse query-structure))
+                                        \space
+                                        (map unparse query-structure))
                                        \})
 
     :else (throw-error "Invalid query")))

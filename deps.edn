@@ -5,4 +5,8 @@
                                                 :sha "e518d9b2b70f4292c9988d2792b8667d88a6f4df"}}
                   :main-opts ["-m"]}
            :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
-                    :main-opts ["-m" "deps-deploy.deps-deploy" "deploy" "graphql-inquiry.jar"]}}}
+                    :main-opts ["-m" "deps-deploy.deps-deploy" "deploy" "graphql-inquiry.jar"]}
+           :clj-kondo {:extra-deps {clj-kondo {:mvn/version "RELEASE"}}
+                       :main-opts ["-m" "clj-kondo.main"]}
+           :cljfmt {:extra-deps {cljfmt {:mvn/version "0.7.0"}}
+                    :main-opts ["-m" "cljfmt.main"]}}}

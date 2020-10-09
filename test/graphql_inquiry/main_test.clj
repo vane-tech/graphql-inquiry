@@ -1,6 +1,6 @@
 (ns graphql-inquiry.main-test
   (:require [clojure.test :refer [is deftest testing]]
-            [graphql-inquiry.main :refer :all]))
+            [graphql-inquiry.main :refer [query mutation]]))
 
 (deftest query-test
   (is (= "{say {hello world}}"
