@@ -28,11 +28,26 @@
            (query [:say (list :hello (filter identity [:world]))]))))
   (testing "metafields"
     (is (= "{say {hello world __typename}}"
-           (query [:say [:hello :world :__typename]])))))
+           (query [:say [:hello :world :__typename]]))))
+  (testing "operation-name"
+    (is (= "query OperationVittles {say {hello world}}"
+           (query {:query [:say [:hello :world]]
+                   :operation-name "OperationVittles"})))
+    (is (= "query OperationNeptuneSpear($id:ID!) {say {hello world}}"
+           (query {:query [:say [:hello :world]]
+                   :variable-defs {:id :ID!}
+                   :operation-name "OperationNeptuneSpear"})))))
 
 (deftest mutation-test
   (is (= "mutation ($id:ID!,$customer:Customer!) {updateCustomer (id:$id,customer:$customer) {name email}}"
          (mutation {:query [:updateCustomer {:id :id
                                              :customer :customer} [:name :email]]
                     :variable-defs {:id :ID!
-                                    :customer :Customer!}}))))
+                                    :customer :Customer!}})))
+  (testing "operation-name"
+    (is (= "mutation OperationValkyrie($id:ID!,$customer:Customer!) {updateCustomer (id:$id,customer:$customer) {name email}}"
+           (mutation {:query [:updateCustomer {:id :id
+                                               :customer :customer} [:name :email]]
+                      :variable-defs {:id :ID!
+                                      :customer :Customer!}
+                      :operation-name "OperationValkyrie"})))))

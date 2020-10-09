@@ -32,18 +32,19 @@
     :else (throw-error "Invalid query")))
 
 (defn- variable-definition [variable-defs]
-  (when (seq variable-defs)
+  (if (seq variable-defs)
     (str \(
          (->> variable-defs
               (map (fn [[variable type]]
                      (str \$ (name variable) \: (name type))))
               (str/join \,))
-         ") ")))
+         ") ")
+    " "))
 
 (defn query [options]
   (cond (sequential? options) (unparse options)
-        (map? options) (str "query " (variable-definition (:variable-defs options)) (unparse (:query options)))
+        (map? options) (str "query " (:operation-name options) (variable-definition (:variable-defs options)) (unparse (:query options)))
         :else (throw-error "Invalid query (must be a map or vector)")))
 
-(defn mutation [{:keys [variable-defs query]}]
-  (str "mutation " (variable-definition variable-defs) (unparse query)))
+(defn mutation [{:keys [variable-defs query operation-name]}]
+  (str "mutation " operation-name (variable-definition variable-defs) (unparse query)))

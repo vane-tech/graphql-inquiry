@@ -116,6 +116,20 @@ query ($id: ID!, $name: String) {
 }
 ```
 
+### Operation names
+
+GraphQL allows optional an [operation name](https://graphql.org/learn/queries/#operation-name). While it's optional for single operation documents, it can be useful for example to identify queries when collecting metrics about them.
+Just pass the `:operation-name` in the query or mutation:
+
+```Clojure
+(query {:query [:say [:hello :world]]
+        :operation-name "OperationVittles"})
+```
+
+```graphql
+query OperationVittles {say {hello world}}
+```
+
 ### Mutations
 
 Mutations work just like queries with variables, but instead of `query`, you call `mutation`:
