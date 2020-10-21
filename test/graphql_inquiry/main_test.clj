@@ -8,12 +8,16 @@
   (is (= "{say {hello {world}}}"
          (query [:say [:hello [:world]]])))
   (testing "with arguments"
-    (is (= "{say (string:\"hae maga\",number:5,true:true,false:false,null:null) {hello world}}"
+    (is (= "{say (string:\"hae maga\",number:5,true:true,false:false,null:null,map:{some:\"key\",submap:{a:1}},vector:[\"hi\",1],list:[\"listy\",false]) {hello world}}"
            (query [:say {:string "hae maga"
                          :number 5
                          :true true
                          :false false
-                         :null nil} [:hello :world]]))))
+                         :null nil
+                         :map {:some "key", :submap {:a 1}}
+                         :vector ["hi", 1]
+                         :list (list "listy" false)}
+                   [:hello :world]]))))
   (testing "with variable-defs"
     (is (= "query ($id:ID!,$greeting:String!) {say (string:\"hae maga\",id:$id) {hello (greeting:$greeting) world}}"
            (query {:query [:say {:string "hae maga"

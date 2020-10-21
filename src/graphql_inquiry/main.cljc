@@ -5,23 +5,30 @@
   #?(:clj (throw (Error. msg))
      :cljs (throw (js/Error msg))))
 
+(declare unparse-args)
+
+(defn- unparse-arg-value [value]
+  (cond (keyword? value) (str \$ (name value))
+        (or (integer? value)
+            (true? value)
+            (false? value)) (str value)
+        (nil? value) "null"
+        (map? value) (str \{ (unparse-args value) \})
+        (sequential? value) (str \[ (->> value (map unparse-arg-value) (str/join \,)) \])
+        :else (str \" value \")))
+
+(defn- unparse-args [args]
+  (str/join
+   \,
+   (map (fn [[key value]]
+          (str (name key) ":" (unparse-arg-value value)))
+        args)))
+
 (defn- unparse [query-structure]
   (cond
     (keyword? query-structure) (name query-structure)
 
-    (map? query-structure) (str \(
-                                (str/join
-                                 \,
-                                 (map (fn [[k v]]
-                                        (let [v (cond (keyword? v) (str \$ (name v))
-                                                      (or (integer? v)
-                                                          (true? v)
-                                                          (false? v)) (str v)
-                                                      (nil? v) "null"
-                                                      :else (str \" v \"))]
-                                          (str (name k) ":" v)))
-                                      query-structure))
-                                \))
+    (map? query-structure) (str \( (unparse-args query-structure) \))
 
     (sequential? query-structure) (str \{
                                        (str/join
